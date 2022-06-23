@@ -50,122 +50,127 @@ struct ContentView: View {
     @State var toggleThemeText = "Dark Mode"
     
     var body: some View {
-        VStack {
-            ProgressView (value: Double(currentQuestion), total: Double(questions.count))
-                .padding()
-            Text(questions[currentQuestion].title)
-                .padding()
-                .foregroundColor(themeColourNegate)
-            
-            HStack {
-                VStack {
-                    Button {
-                        didTapOption(optionNumber: 1)
-                    } label: {
-                        ZStack {
-                            RoundedRectangle(cornerRadius: 25)
-                                .frame(width: 200, height: 50)
-                                .foregroundColor(.red)
-                            HStack{
-                                Image(systemName: "triangle.fill")
-                                    .foregroundColor(Color.white)
-                                Text(questions[currentQuestion].option1)
-                                    .fontWeight(.bold)
-                                    .foregroundColor(.white)
-                            }
-                        }
-          }
+        ZStack {
+            Rectangle()
+                .background(themeColour)
+                .foregroundColor(themeColour)
+            VStack {
+                ProgressView (value: Double(currentQuestion), total: Double(questions.count))
+                    .padding()
+                Text(questions[currentQuestion].title)
+                    .padding()
+                    .foregroundColor(themeColourNegate)
+                
+                HStack {
+                    VStack {
                         Button {
-                                didTapOption(optionNumber: 2)
+                            didTapOption(optionNumber: 1)
                         } label: {
-                        ZStack {
-                            RoundedRectangle(cornerRadius: 25)
-                                .frame(width: 200, height: 50)
-                                .foregroundColor(.red)
-                            HStack{
-                                Image(systemName: "circle.fill")
-                                    .foregroundColor(.blue)
-                                Text(questions[currentQuestion].option2)
-                                    .fontWeight(.bold)
-                                    .foregroundColor(.white)
+                            ZStack {
+                                RoundedRectangle(cornerRadius: 15)
+                                    .frame(width: 175, height: 50)
+                                    .foregroundColor(.red)
+                                HStack{
+                                    Image(systemName: "triangle.fill")
+                                        .foregroundColor(Color.white)
+                                    Text(questions[currentQuestion].option1)
+                                        .fontWeight(.bold)
+                                        .foregroundColor(.white)
+                                }
+                            }
+              }
+                            Button {
+                                    didTapOption(optionNumber: 2)
+                            } label: {
+                            ZStack {
+                                RoundedRectangle(cornerRadius: 15)
+                                    .frame(width: 175, height: 50)
+                                    .foregroundColor(.green)
+                                HStack{
+                                    Image(systemName: "circle.fill")
+                                        .foregroundColor(.white)
+                                    Text(questions[currentQuestion].option2)
+                                        .fontWeight(.bold)
+                                        .foregroundColor(.white)
+                                }
                             }
                         }
                     }
+                    .padding()
+                    VStack {
+                        Button {
+                            didTapOption(optionNumber: 3)
+                        } label: {
+                            ZStack {
+                                RoundedRectangle(cornerRadius: 15)
+                                    .frame(width: 175, height: 50)
+                                    .foregroundColor(.blue)
+                                HStack{
+                                    Image(systemName: "diamond.fill")
+                                        .foregroundColor(.white)
+                                    Text(questions[currentQuestion].option3)
+                                        .fontWeight(.bold)
+                                        .foregroundColor(.white)
+                                }
+                            }
+                        }
+                        Button {
+                            didTapOption(optionNumber: 4)
+                        } label: {
+                            ZStack {
+                                RoundedRectangle(cornerRadius: 15)
+                                    .frame(width: 175, height: 50)
+                                    .foregroundColor(.yellow)
+                                HStack{
+                                    Image(systemName: "square.fill")
+                                        .foregroundColor(.white)
+                                    Text(questions[currentQuestion].option4)
+                                        .fontWeight(.bold)
+                                        .foregroundColor(.white)
+                                }
+                            }
+                        }
+                    }
+                    .padding()
                 }
                 .padding()
-                VStack {
-                    Button {
-                        didTapOption(optionNumber: 3)
-                    } label: {
-                        ZStack {
-                            RoundedRectangle(cornerRadius: 25)
-                                .frame(width: 200, height: 50)
-                                .foregroundColor(.red)
-                            HStack{
-                                Image(systemName: "diamond.fill")
-                                    .foregroundColor(.blue)
-                                Text(questions[currentQuestion].option3)
-                                    .fontWeight(.bold)
-                                    .foregroundColor(.white)
-                            }
-                        }
+                Button {
+                    darkModeOn = !darkModeOn
+                    if darkModeOn {
+                        themeColour = Color(red: 0.2, green: 0.2, blue: 0.2)
+                        themeColourNegate = Color.white
+                        toggleThemeText = "Light Mode 🤮"
                     }
-                    Button {
-                        didTapOption(optionNumber: 4)
-                    } label: {
-                        ZStack {
-                            RoundedRectangle(cornerRadius: 25)
-                                .frame(width: 200, height: 50)
-                                .foregroundColor(.red)
-                            HStack{
-                                Image(systemName: "square.fill")
-                                    .foregroundColor(.blue)
-                                Text(questions[currentQuestion].option4)
-                                    .fontWeight(.bold)
-                                    .foregroundColor(.white)
-                            }
-                        }
+                    else {
+                        themeColour = Color.white
+                        themeColourNegate = Color.black
+                        toggleThemeText = "Dark Mode"
                     }
-                }
-                .padding()
-            }
-            .padding()
-            Button {
-                darkModeOn = !darkModeOn
-                if darkModeOn {
-                    themeColour = Color(red: 0.2, green: 0.2, blue: 0.2)
-                    themeColourNegate = Color.white
-                    toggleThemeText = "Light Mode 🤮"
-                }
-                else {
-                    themeColour = Color.white
-                    themeColourNegate = Color.black
-                    toggleThemeText = "Dark Mode"
-                }
-            } label: {
-                ZStack {
-                    RoundedRectangle(cornerRadius: 30)
-                        .frame(width: 150, height: 50)
-                        .foregroundColor(themeColourNegate)
-                    Text("\(toggleThemeText)")
-                        .foregroundColor(themeColour)
+                } label: {
+                    ZStack {
+                        RoundedRectangle(cornerRadius: 30)
+                            .frame(width: 150, height: 50)
+                            .foregroundColor(themeColourNegate)
+                        Text("\(toggleThemeText)")
+                            .foregroundColor(themeColour)
+                    }
                 }
             }
-        }
-        .alert(isPresented: $isAlertPresented) {
-            
-            Alert(title: Text(isCorrect ? "Correct" : "Wrong"),
-                  message: Text(isCorrect ? "Sheesh Le Poggeres" : "wow so dum"),
-                  dismissButton: .default(Text(isCorrect ? "*gigachad handshake*" : "yes ik")) {
-                    currentQuestion += 1
-                    
-                    if currentQuestion == questions.count {
-                        isModalPresented = true
-                        currentQuestion = 0
-                    }
-                  })
-        }.sheet(isPresented: $isModalPresented) {
-            ResultsScreen(score: correctAnswers, totalQuestions: questions.count)
+            .alert(isPresented: $isAlertPresented) {
+                
+                Alert(title: Text(isCorrect ? "Correct" : "Wrong"),
+                      message: Text(isCorrect ? "Sheesh Le Poggeres" : "wow so dum"),
+                      dismissButton: .default(Text(isCorrect ? "*gigachad handshake*" : "yes ik")) {
+                        currentQuestion += 1
+                        
+                        if currentQuestion == questions.count {
+                            isModalPresented = true
+                            currentQuestion = 0
+                        }
+                      })
+            }.sheet(isPresented: $isModalPresented) {
+                ResultsScreen(score: correctAnswers, totalQuestions: questions.count, colour: themeColour, colourNegate: themeColourNegate)
+            }
         }
     }
     
